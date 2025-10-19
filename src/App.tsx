@@ -3,34 +3,49 @@ import { Heart, MapPin, Calendar, Clock } from 'lucide-react';
 
 function App() {
   const [guestName, setGuestName] = useState<string>('nuestro invitado especial');
-  const [guestHash, setGuestHash] = useState<string>('');
-  const [confirmed, setConfirmed] = useState(false);
+  const [guestBase64, setGuestBase64] = useState<string>('');
+  const [confirmationStatus, setConfirmationStatus] = useState<'none' | 'confirmed' | 'already-confirmed' | 'error'>('none');
   const [isConfirming, setIsConfirming] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const invitadoHash = params.get('invitado');
+    const invitadoBase64 = params.get('invitado');
 
-    if (invitadoHash) {
-      setGuestHash(invitadoHash);
-      fetchGuestName(invitadoHash);
+    if (invitadoBase64) {
+      setGuestBase64(invitadoBase64);
+      fetchGuestName(invitadoBase64);
     }
   }, []);
 
-  const fetchGuestName = async (hash: string) => {
-    setGuestName('nuestro invitado especial');
+  const fetchGuestName = async (base64: string) => {
+    try {
+      // Decode base64 to get guest name(s)
+      const decoded = atob(base64);
+      setGuestName(decoded);
+    } catch (error) {
+      console.error('Error decoding base64:', error);
+      setGuestName('nuestro invitado especial');
+    }
   };
 
   const handleConfirmation = async () => {
-    if (!guestHash || isConfirming) return;
+    if (!guestBase64 || isConfirming) return;
 
     setIsConfirming(true);
     try {
-      const apiUrl = `https://api.confirmacionboda.com/confirmar?invitado=${guestHash}`;
-      await fetch(apiUrl, { method: 'GET' });
-      setConfirmed(true);
+      const apiUrl = `https://api.confirmacionboda.com/confirmar?invitado=${guestBase64}`;
+      const response = await fetch(apiUrl, { method: 'GET' });
+      
+      if (response.status === 200) {
+        setConfirmationStatus('confirmed');
+      } else if (response.status === 301) {
+        setConfirmationStatus('already-confirmed');
+      } else {
+        setConfirmationStatus('error');
+      }
     } catch (error) {
       console.error('Error confirming:', error);
+      setConfirmationStatus('error');
     } finally {
       setIsConfirming(false);
     }
@@ -133,15 +148,33 @@ function App() {
           </div>
 
           <div className="text-center">
-            {confirmed ? (
+            {confirmationStatus === 'confirmed' ? (
               <div className="inline-flex items-center space-x-2 bg-green-100 text-green-700 px-8 py-4 rounded-full text-lg font-semibold">
                 <Heart className="w-5 h-5 fill-green-700" />
-                <span>¡Gracias por confirmar!</span>
+                <span>¡Invitación confirmada!</span>
+              </div>
+            ) : confirmationStatus === 'already-confirmed' ? (
+              <div className="inline-flex items-center space-x-2 bg-yellow-100 text-yellow-700 px-8 py-4 rounded-full text-lg font-semibold">
+                <Heart className="w-5 h-5 fill-yellow-700" />
+                <span>Ya habías confirmado la invitación</span>
+              </div>
+            ) : confirmationStatus === 'error' ? (
+              <div className="space-y-4">
+                <div className="inline-flex items-center space-x-2 bg-red-100 text-red-700 px-8 py-4 rounded-full text-lg font-semibold">
+                  <span>Error al confirmar. Intenta nuevamente.</span>
+                </div>
+                <button
+                  onClick={handleConfirmation}
+                  disabled={isConfirming || !guestBase64}
+                  className="bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
+                >
+                  {isConfirming ? 'Confirmando...' : 'Reintentar'}
+                </button>
               </div>
             ) : (
               <button
                 onClick={handleConfirmation}
-                disabled={isConfirming || !guestHash}
+                disabled={isConfirming || !guestBase64}
                 className="bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
               >
                 {isConfirming ? 'Confirmando...' : 'Confirmar Asistencia'}
