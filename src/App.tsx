@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Heart, MapPin, Calendar, Clock } from 'lucide-react';
-import { supabase } from './lib/supabase';
-import type { Guest } from './types/supabase';
 
 function App() {
   const [guestName, setGuestName] = useState<string>('nuestro invitado especial');
@@ -20,25 +18,7 @@ function App() {
   }, []);
 
   const fetchGuestName = async (hash: string) => {
-    try {
-      const { data, error } = await supabase
-        .from('guests')
-        .select('name, confirmed')
-        .eq('hash', hash)
-        .maybeSingle();
-
-      if (error) {
-        console.error('Error fetching guest:', error);
-        return;
-      }
-
-      if (data) {
-        setGuestName(data.name);
-        setConfirmed(data.confirmed);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    setGuestName('nuestro invitado especial');
   };
 
   const handleConfirmation = async () => {
