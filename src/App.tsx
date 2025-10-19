@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Heart, MapPin, Calendar, Clock, ChevronLeft, ChevronRight, Shirt } from 'lucide-react';
+import { Heart, Calendar, Clock, ChevronLeft, ChevronRight, Shirt } from 'lucide-react';
 
 function App() {
   const [guestName, setGuestName] = useState<string>('nuestro invitado especial');
@@ -32,7 +32,7 @@ function App() {
     updateCountdown();
     const interval = setInterval(updateCountdown, 1000);
     return () => clearInterval(interval);
-  }, [weddingDate]);
+  }, []); // Solo ejecuta una vez al montar
   const [isConfirming, setIsConfirming] = useState(false);
   
   // Estado del carrusel estilo Instagram Stories
@@ -88,13 +88,10 @@ function App() {
   // Similar al comportamiento de Instagram Stories
   useEffect(() => {
     const interval = setInterval(() => {
-      // Usa módulo para volver al inicio cuando llega al final
       setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length);
-    }, 4000); // Cambiar imagen cada 4 segundos
-
-    // Limpia el intervalo cuando el componente se desmonta
+    }, 4000);
     return () => clearInterval(interval);
-  }, [carouselImages.length]);
+  }, []); // Solo ejecuta una vez al montar
 
   const fetchGuestName = async (base64: string) => {
     try {
