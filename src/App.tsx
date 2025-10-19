@@ -6,14 +6,21 @@ function App() {
   const [guestBase64, setGuestBase64] = useState<string>('');
   const [confirmationStatus, setConfirmationStatus] = useState<'none' | 'confirmed' | 'already-confirmed' | 'declined' | 'already-declined' | 'error'>('none');
   const [isConfirming, setIsConfirming] = useState(false);
+  
+  // Estado del carrusel estilo Instagram Stories
+  // Índice de la imagen actual que se está mostrando en el carrusel
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  // Posición inicial del toque en el eje X (en píxeles) para detectar gestos de deslizamiento
   const [touchStart, setTouchStart] = useState<number | null>(null);
+  // Posición final del toque en el eje X (en píxeles) para calcular la dirección del deslizamiento
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
-  // Minimum swipe distance (in px)
+  // Distancia mínima de deslizamiento (en píxeles) necesaria para cambiar de imagen
+  // Previene cambios accidentales por toques pequeños o involuntarios
   const minSwipeDistance = 50;
 
-  // Sample images - replace with actual wedding photos
+  // Imágenes del carrusel - Actualmente usa fotos de ejemplo de Unsplash
+  // TODO: Reemplazar con fotos reales de la boda
   const carouselImages = [
     'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=1067&fit=crop',
     'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&h=1067&fit=crop',
@@ -31,12 +38,16 @@ function App() {
     }
   }, []);
 
-  // Auto-advance carousel
+  // Efecto para avanzar automáticamente el carrusel
+  // Cambia a la siguiente imagen cada 4 segundos de forma automática
+  // Similar al comportamiento de Instagram Stories
   useEffect(() => {
     const interval = setInterval(() => {
+      // Usa módulo para volver al inicio cuando llega al final
       setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length);
-    }, 4000); // Change image every 4 seconds
+    }, 4000); // Cambiar imagen cada 4 segundos
 
+    // Limpia el intervalo cuando el componente se desmonta
     return () => clearInterval(interval);
   }, [carouselImages.length]);
 
@@ -74,33 +85,61 @@ function App() {
     }
   };
 
+  // Funciones de navegación del carrusel
+
+  /**
+   * Avanza a la siguiente imagen del carrusel
+   * Usa módulo para volver al inicio cuando llega al final
+   */
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length);
   };
 
+  /**
+   * Retrocede a la imagen anterior del carrusel
+   * Suma la longitud del array antes de aplicar módulo para evitar números negativos
+   */
   const previousImage = () => {
     setCurrentImageIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
   };
 
+  // Manejadores de eventos táctiles para navegación por gestos (swipe)
+  // Implementa el comportamiento de deslizamiento estilo Instagram Stories
+
+  /**
+   * Captura la posición inicial cuando el usuario toca la pantalla
+   * Resetea touchEnd para preparar un nuevo gesto
+   */
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
   };
 
+  /**
+   * Actualiza continuamente la posición mientras el usuario desliza el dedo
+   * Permite calcular la dirección y distancia del deslizamiento
+   */
   const onTouchMove = (e: React.TouchEvent) => {
     setTouchEnd(e.targetTouches[0].clientX);
   };
 
+  /**
+   * Se ejecuta cuando el usuario levanta el dedo de la pantalla
+   * Calcula la dirección del deslizamiento y navega si supera la distancia mínima
+   */
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
     
+    // Calcula la distancia del deslizamiento (positivo = izquierda, negativo = derecha)
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
     
+    // Deslizar izquierda = siguiente imagen
     if (isLeftSwipe) {
       nextImage();
     }
+    // Deslizar derecha = imagen anterior
     if (isRightSwipe) {
       previousImage();
     }
@@ -111,10 +150,19 @@ function App() {
       <div className="absolute inset-0 opacity-5 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTAgMTBhNSA1IDAgMCAxIDUgNXY3MGE1IDUgMCAwIDEtNSA1IDUgNSAwIDAgMS01LTVWMTVhNSA1IDAgMCAxIDUtNXoiIGZpbGw9IiNmZjliYjAiLz48L3N2Zz4=')]" />
 
       <div className="container mx-auto px-4 py-12 max-w-4xl relative z-10">
-        {/* Instagram Stories Style Carousel */}
+        {/* Carrusel estilo Instagram Stories */}
+        {/* Este componente replica el comportamiento de Instagram Stories con: */}
+        {/* - Barras de progreso en la parte superior */}
+        {/* - Navegación por gestos táctiles (swipe) */}
+        {/* - Navegación por flechas (en hover para desktop) */}
+        {/* - Indicadores de página en la parte inferior */}
+        {/* - Transiciones suaves entre imágenes */}
+        {/* - Avance automático cada 4 segundos */}
         <div className="mb-16">
           <div className="relative w-full">
-            {/* Story progress bars */}
+            {/* Barras de progreso estilo Stories */}
+            {/* Muestra el progreso de visualización de cada imagen */}
+            {/* Similar a las barras en la parte superior de Instagram Stories */}
             <div className="absolute top-2 left-2 right-2 z-20 flex gap-1">
               {carouselImages.map((_, index) => (
                 <div
@@ -123,6 +171,9 @@ function App() {
                 >
                   <div
                     className={`h-full bg-white transition-all duration-300 ${
+                      // Imagen actual: barra completa con animación
+                      // Imágenes pasadas: barra completa
+                      // Imágenes futuras: barra vacía
                       index === currentImageIndex ? 'w-full animate-progress' : index < currentImageIndex ? 'w-full' : 'w-0'
                     }`}
                   />
@@ -130,7 +181,9 @@ function App() {
               ))}
             </div>
 
-            {/* Carousel Container */}
+            {/* Contenedor del carrusel */}
+            {/* Formato vertical 9:16 similar a Stories de Instagram */}
+            {/* Los eventos táctiles permiten navegación por gestos de deslizamiento */}
             <div 
               className="relative overflow-hidden rounded-3xl shadow-2xl"
               style={{ aspectRatio: '9/16' }}
@@ -138,17 +191,18 @@ function App() {
               onTouchMove={onTouchMove}
               onTouchEnd={onTouchEnd}
             >
-              {/* Images with animation */}
+              {/* Contenedor de imágenes con animaciones */}
+              {/* Cada imagen se posiciona absolutamente y se anima al cambiar */}
               <div className="relative w-full h-full">
                 {carouselImages.map((image, index) => (
                   <div
                     key={index}
                     className={`absolute inset-0 transition-all duration-700 ease-in-out ${
                       index === currentImageIndex
-                        ? 'opacity-100 scale-100'
+                        ? 'opacity-100 scale-100' // Imagen actual: visible y tamaño normal
                         : index < currentImageIndex
-                        ? 'opacity-0 scale-95 -translate-x-full'
-                        : 'opacity-0 scale-95 translate-x-full'
+                        ? 'opacity-0 scale-95 -translate-x-full' // Imágenes pasadas: deslizada a la izquierda
+                        : 'opacity-0 scale-95 translate-x-full' // Imágenes futuras: deslizada a la derecha
                     }`}
                   >
                     <img
@@ -160,7 +214,9 @@ function App() {
                 ))}
               </div>
 
-              {/* Navigation Arrows */}
+              {/* Flechas de navegación */}
+              {/* Visibles solo en hover (principalmente para desktop) */}
+              {/* En móviles, los usuarios usarán gestos de deslizamiento */}
               <button
                 onClick={previousImage}
                 className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 opacity-0 hover:opacity-100 group-hover:opacity-100"
@@ -177,13 +233,16 @@ function App() {
                 <ChevronRight className="w-5 h-5" />
               </button>
 
-              {/* Touch indicators */}
+              {/* Indicadores de posición (dots) */}
+              {/* Puntos en la parte inferior que indican qué imagen se está viendo */}
+              {/* También funcionan como botones para navegar directamente a una imagen */}
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                 {carouselImages.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentImageIndex(index)}
                     className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      // El indicador activo es más ancho y completamente blanco
                       index === currentImageIndex ? 'bg-white w-8' : 'bg-white/50'
                     }`}
                     aria-label={`Ir a imagen ${index + 1}`}
