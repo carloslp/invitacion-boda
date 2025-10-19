@@ -112,8 +112,8 @@ function App() {
 
       <div className="container mx-auto px-4 py-12 max-w-4xl relative z-10">
         {/* Instagram Stories Style Carousel */}
-        <div className="mb-16 flex justify-center">
-          <div className="relative w-full max-w-md">
+        <div className="mb-16">
+          <div className="relative w-full">
             {/* Story progress bars */}
             <div className="absolute top-2 left-2 right-2 z-20 flex gap-1">
               {carouselImages.map((_, index) => (
