@@ -5,6 +5,34 @@ function App() {
   const [guestName, setGuestName] = useState<string>('nuestro invitado especial');
   const [guestBase64, setGuestBase64] = useState<string>('');
   const [confirmationStatus, setConfirmationStatus] = useState<'none' | 'confirmed' | 'already-confirmed' | 'declined' | 'already-declined' | 'error'>('none');
+  // Fecha de la boda: 19 de octubre de 2025, 20:00 hora local
+  const weddingDate = new Date('2025-10-18T20:00:00');
+  const [countdown, setCountdown] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    finished: false,
+  });
+
+  useEffect(() => {
+    const updateCountdown = () => {
+      const now = new Date();
+      const diff = weddingDate.getTime() - now.getTime();
+      if (diff <= 0) {
+        setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0, finished: true });
+        return;
+      }
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      setCountdown({ days, hours, minutes, seconds, finished: false });
+    };
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+    return () => clearInterval(interval);
+  }, [weddingDate]);
   const [isConfirming, setIsConfirming] = useState(false);
   
   // Estado del carrusel estilo Instagram Stories
@@ -149,115 +177,10 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50">
-      <div className="absolute inset-0 opacity-5 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTAgMTBhNSA1IDAgMCAxIDUgNXY3MGE1IDUgMCAwIDEtNSA1IDUgNSAwIDAgMS01LTVWMTVhNSA1IDAgMCAxIDUtNXoiIGZpbGw9IiNmZjliYjAiLz48L3N2Zz4=')]" />
-
-      <div className="container mx-auto px-4 py-12 max-w-4xl relative z-10">
-        {/* Carrusel estilo Instagram Stories */}
-        {/* Este componente replica el comportamiento de Instagram Stories con: */}
-        {/* - Barras de progreso en la parte superior */}
-        {/* - Navegación por gestos táctiles (swipe) */}
-        {/* - Navegación por flechas (en hover para desktop) */}
-        {/* - Indicadores de página en la parte inferior */}
-        {/* - Transiciones suaves entre imágenes */}
-        {/* - Avance automático cada 4 segundos */}
-        <div className="mb-16">
-          <h2 className="font-serif text-3xl md:text-4xl text-center text-gray-800 mb-6 tracking-wide">
-            Recuerdos de nuestro amor
-          </h2>
-          <div className="relative w-full">
-            {/* Barras de progreso estilo Stories */}
-            {/* Muestra el progreso de visualización de cada imagen */}
-            {/* Similar a las barras en la parte superior de Instagram Stories */}
-            <div className="absolute top-2 left-2 right-2 z-20 flex gap-1">
-              {carouselImages.map((_, index) => (
-                <div
-                  key={index}
-                  className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden"
-                >
-                  <div
-                    className={`h-full bg-white transition-all duration-300 ${
-                      // Imagen actual: barra completa con animación
-                      // Imágenes pasadas: barra completa
-                      // Imágenes futuras: barra vacía
-                      index === currentImageIndex ? 'w-full animate-progress' : index < currentImageIndex ? 'w-full' : 'w-0'
-                    }`}
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* Contenedor del carrusel */}
-            {/* Formato vertical 9:16 similar a Stories de Instagram */}
-            {/* Los eventos táctiles permiten navegación por gestos de deslizamiento */}
-            <div 
-              className="relative overflow-hidden rounded-3xl shadow-2xl bg-gray-800"
-              style={{ aspectRatio: '9/16' }}
-              onTouchStart={onTouchStart}
-              onTouchMove={onTouchMove}
-              onTouchEnd={onTouchEnd}
-            >
-              {/* Contenedor de imágenes con animaciones */}
-              {/* Cada imagen se posiciona absolutamente y se anima al cambiar */}
-              <div className="relative w-full h-full">
-                {carouselImages.map((image, index) => (
-                  <div
-                    key={index}
-                    className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-                      index === currentImageIndex
-                        ? 'opacity-100 scale-100' // Imagen actual: visible y tamaño normal
-                        : index < currentImageIndex
-                        ? 'opacity-0 scale-95 -translate-x-full' // Imágenes pasadas: deslizada a la izquierda
-                        : 'opacity-0 scale-95 translate-x-full' // Imágenes futuras: deslizada a la derecha
-                    }`}
-                  >
-                    <img
-                      src={image}
-                      alt={`Wedding photo ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-
-              {/* Flechas de navegación */}
-              {/* Visibles solo en hover (principalmente para desktop) */}
-              {/* En móviles, los usuarios usarán gestos de deslizamiento */}
-              <button
-                onClick={previousImage}
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 opacity-0 hover:opacity-100 group-hover:opacity-100"
-                aria-label="Imagen anterior"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              
-              <button
-                onClick={nextImage}
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 opacity-0 hover:opacity-100 group-hover:opacity-100"
-                aria-label="Siguiente imagen"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-
-              {/* Indicadores de posición (dots) */}
-              {/* Puntos en la parte inferior que indican qué imagen se está viendo */}
-              {/* También funcionan como botones para navegar directamente a una imagen */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                {carouselImages.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentImageIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      // El indicador activo es más ancho y completamente blanco
-                      index === currentImageIndex ? 'bg-white w-8' : 'bg-white/50'
-                    }`}
-                    aria-label={`Ir a imagen ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 flex flex-col">
+      <div className="absolute inset-0 opacity-5 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTAgMTBhNSA1IDAgMCAxIDUgNXY3MGE1IDUgMCAwIDEtNSA1IDUgNSAwIDAgMS01LTVWMTVhNSA1IDAgMCAxIDUtNXoiIGZpbGw9IiNmZjliYjAiLz48L3N2Zz4=')]"></div>
+      <div className="flex-1 flex flex-col justify-center items-center">
+        <div className="w-full max-w-4xl px-4 py-8 md:py-12">
 
         <div className="text-center mb-16 space-y-6">
           <div className="inline-block">
@@ -349,75 +272,176 @@ function App() {
               Hemos encontrado en el otro un refugio y un futuro juntos."
             </p>
           </div>
-
-          <div className="text-center">
-            {confirmationStatus === 'confirmed' ? (
-              <div className="inline-flex items-center space-x-2 bg-green-100 text-green-700 px-8 py-4 rounded-full text-lg font-semibold">
-                <Heart className="w-5 h-5 fill-green-700" />
-                <span>¡Invitación confirmada!</span>
+                    {/* Slider integrado en la invitación, adaptado al alto de pantalla */}
+          <div className="mb-10 flex flex-col items-center">
+            <h2 className="font-serif text-3xl md:text-4xl text-center text-gray-800 mb-6 tracking-wide">
+              Recuerdos de nuestro amor
+            </h2>
+            <div className="relative w-full max-w-md" style={{height: 'min(70vh, 600px)'}}>
+              {/* Barras de progreso estilo Stories */}
+              <div className="absolute top-2 left-2 right-2 z-20 flex gap-1">
+                {carouselImages.map((_, index) => (
+                  <div
+                    key={index}
+                    className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden"
+                  >
+                    <div
+                      className={`h-full bg-white transition-all duration-300 ${
+                        index === currentImageIndex ? 'w-full animate-progress' : index < currentImageIndex ? 'w-full' : 'w-0'
+                      }`}
+                    />
+                  </div>
+                ))}
               </div>
-            ) : confirmationStatus === 'already-confirmed' ? (
-              <div className="inline-flex items-center space-x-2 bg-yellow-100 text-yellow-700 px-8 py-4 rounded-full text-lg font-semibold">
-                <Heart className="w-5 h-5 fill-yellow-700" />
-                <span>Ya habías confirmado la invitación</span>
-              </div>
-            ) : confirmationStatus === 'declined' ? (
-              <div className="inline-flex items-center space-x-2 bg-gray-100 text-gray-700 px-8 py-4 rounded-full text-lg font-semibold">
-                <Heart className="w-5 h-5" />
-                <span>Lamentamos que no puedas asistir</span>
-              </div>
-            ) : confirmationStatus === 'already-declined' ? (
-              <div className="inline-flex items-center space-x-2 bg-gray-100 text-gray-700 px-8 py-4 rounded-full text-lg font-semibold">
-                <Heart className="w-5 h-5" />
-                <span>Ya habías indicado que no podías asistir</span>
-              </div>
-            ) : confirmationStatus === 'error' ? (
-              <div className="space-y-4">
-                <div className="inline-flex items-center space-x-2 bg-red-100 text-red-700 px-8 py-4 rounded-full text-lg font-semibold">
-                  <span>Error al confirmar. Intenta nuevamente.</span>
+              <div 
+                className="relative overflow-hidden rounded-3xl shadow-2xl bg-gray-800 h-full"
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
+              >
+                <div className="relative w-full h-full">
+                  {carouselImages.map((image, index) => (
+                    <div
+                      key={index}
+                      className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+                        index === currentImageIndex
+                          ? 'opacity-100 scale-100'
+                          : index < currentImageIndex
+                          ? 'opacity-0 scale-95 -translate-x-full'
+                          : 'opacity-0 scale-95 translate-x-full'
+                      }`}
+                    >
+                      <img
+                        src={image}
+                        alt={`Wedding photo ${index + 1}`}
+                        className="w-full h-full object-cover"
+                        style={{height: '100%', width: '100%'}}
+                      />
+                    </div>
+                  ))}
                 </div>
+                {/* Flechas de navegación */}
+                <button
+                  onClick={previousImage}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 opacity-0 hover:opacity-100 group-hover:opacity-100"
+                  aria-label="Imagen anterior"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 opacity-0 hover:opacity-100 group-hover:opacity-100"
+                  aria-label="Siguiente imagen"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+                {/* Indicadores de posición (dots) */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                  {carouselImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentImageIndex(index)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        index === currentImageIndex ? 'bg-white w-8' : 'bg-white/50'
+                      }`}
+                      aria-label={`Ir a imagen ${index + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Aquí va el resto del contenido de la invitación, dentro del mismo div raíz */}
+          {/* ...existing code... */}
+              {/* ...existing code... */}
+              {/* Contador regresivo para la fecha de la boda - justo arriba de los botones */}
+              <div className="flex flex-col items-center pb-6">
+                <div className="inline-flex items-center space-x-4 bg-indigo-50 text-indigo-700 px-8 py-4 rounded-full text-lg font-semibold shadow-md" style={{marginBottom: '8px'}}>
+                  <Calendar className="w-5 h-5" />
+                  <span>
+                    Faltan&nbsp;
+                    <span className="font-mono">
+                      {countdown.days}d {countdown.hours}h {countdown.minutes}m {countdown.seconds}s
+                    </span>
+                    &nbsp;para la boda
+                  </span>
+                </div>
+                {countdown.finished && (
+                  <div className="mt-2 text-red-600 font-bold">¡Ya comenzó la boda!</div>
+                )}
+              </div>
+          <div className="text-center">
+            {!countdown.finished && (
+              confirmationStatus === 'confirmed' ? (
+                <div className="inline-flex items-center space-x-2 bg-green-100 text-green-700 px-8 py-4 rounded-full text-lg font-semibold">
+                  <Heart className="w-5 h-5 fill-green-700" />
+                  <span>¡Invitación confirmada!</span>
+                </div>
+              ) : confirmationStatus === 'already-confirmed' ? (
+                <div className="inline-flex items-center space-x-2 bg-yellow-100 text-yellow-700 px-8 py-4 rounded-full text-lg font-semibold">
+                  <Heart className="w-5 h-5 fill-yellow-700" />
+                  <span>Ya habías confirmado la invitación</span>
+                </div>
+              ) : confirmationStatus === 'declined' ? (
+                <div className="inline-flex items-center space-x-2 bg-gray-100 text-gray-700 px-8 py-4 rounded-full text-lg font-semibold">
+                  <Heart className="w-5 h-5" />
+                  <span>Lamentamos que no puedas asistir</span>
+                </div>
+              ) : confirmationStatus === 'already-declined' ? (
+                <div className="inline-flex items-center space-x-2 bg-gray-100 text-gray-700 px-8 py-4 rounded-full text-lg font-semibold">
+                  <Heart className="w-5 h-5" />
+                  <span>Ya habías indicado que no podías asistir</span>
+                </div>
+              ) : confirmationStatus === 'error' ? (
+                <div className="space-y-4">
+                  <div className="inline-flex items-center space-x-2 bg-red-100 text-red-700 px-8 py-4 rounded-full text-lg font-semibold">
+                    <span>Error al confirmar. Intenta nuevamente.</span>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button
+                      onClick={() => handleConfirmation(true)}
+                      disabled={isConfirming || !guestBase64}
+                      className="bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
+                    >
+                      {isConfirming ? 'Confirmando...' : 'Reintentar Confirmar'}
+                    </button>
+                    <button
+                      onClick={() => handleConfirmation(false)}
+                      disabled={isConfirming || !guestBase64}
+                      className="bg-gradient-to-r from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
+                    >
+                      {isConfirming ? 'Enviando...' : 'Reintentar Declinar'}
+                    </button>
+                  </div>
+                </div>
+              ) : (
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <button
                     onClick={() => handleConfirmation(true)}
                     disabled={isConfirming || !guestBase64}
                     className="bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
                   >
-                    {isConfirming ? 'Confirmando...' : 'Reintentar Confirmar'}
+                    {isConfirming ? 'Confirmando...' : 'Confirmar Asistencia'}
                   </button>
                   <button
                     onClick={() => handleConfirmation(false)}
                     disabled={isConfirming || !guestBase64}
                     className="bg-gradient-to-r from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
                   >
-                    {isConfirming ? 'Enviando...' : 'Reintentar Declinar'}
+                    {isConfirming ? 'Enviando...' : 'No gracias, no podré asistir'}
                   </button>
                 </div>
-              </div>
-            ) : (
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button
-                  onClick={() => handleConfirmation(true)}
-                  disabled={isConfirming || !guestBase64}
-                  className="bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
-                >
-                  {isConfirming ? 'Confirmando...' : 'Confirmar Asistencia'}
-                </button>
-                <button
-                  onClick={() => handleConfirmation(false)}
-                  disabled={isConfirming || !guestBase64}
-                  className="bg-gradient-to-r from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
-                >
-                  {isConfirming ? 'Enviando...' : 'No gracias, no podré asistir'}
-                </button>
-              </div>
+              )
             )}
+
           </div>
         </div>
 
         <div className="text-center text-gray-500 text-sm">
           <p className="font-light">Con todo nuestro amor y gratitud</p>
         </div>
-      </div>
+      </div> {/* cierre de w-full max-w-4xl px-4 py-8 md:py-12 */}
+      </div> {/* cierre de flex-1 flex flex-col justify-center items-center */}
     </div>
   );
 }
