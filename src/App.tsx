@@ -52,8 +52,25 @@ function App() {
   // Las imágenes del carrusel ahora se toman de la carpeta /public/carousel
   // Ejemplo: carousel1.jpg, carousel2.jpg, carousel3.jpg...
   const carouselImages = [
-    '/carousel/20211215_221135.jpg',
-    '/carousel/IMG_1882.HEIC',
+    '/carousel/01.jpg',
+    '/carousel/02.jpg',
+    '/carousel/03.jpg',
+    '/carousel/04.jpg',
+    '/carousel/06.jpg',
+    '/carousel/07.jpg',
+    '/carousel/08.jpg',
+    '/carousel/09.jpg',
+    '/carousel/10.jpg',
+    '/carousel/11.jpg',
+    '/carousel/12.jpg',
+    '/carousel/13.jpg',
+    '/carousel/14.jpg',
+    '/carousel/15.jpg',
+    '/carousel/16.jpg',
+    '/carousel/17.jpg',
+    '/carousel/18.jpg',
+    '/carousel/19.jpeg',
+    '/carousel/20.jpg',
   ];
 
   useEffect(() => {
