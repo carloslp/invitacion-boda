@@ -22,10 +22,13 @@ function App() {
   // Imágenes del carrusel - Actualmente usa fotos de ejemplo de Unsplash
   // TODO: Reemplazar con fotos reales de la boda
   const carouselImages = [
-    'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=1067&fit=crop',
-    'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&h=1067&fit=crop',
-    'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&h=1067&fit=crop',
-    'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&h=1067&fit=crop',
+    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="1067"%3E%3Crect fill="%23e5e7eb" width="600" height="1067"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="40" fill="%236b7280"%3EFoto 1%3C/text%3E%3C/svg%3E',
+    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="1067"%3E%3Crect fill="%23ddd6fe" width="600" height="1067"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="40" fill="%236b7280"%3EFoto 2%3C/text%3E%3C/svg%3E',
+    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="1067"%3E%3Crect fill="%23dbeafe" width="600" height="1067"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="40" fill="%236b7280"%3EFoto 3%3C/text%3E%3C/svg%3E',
+    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="1067"%3E%3Crect fill="%23fce7f3" width="600" height="1067"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="40" fill="%236b7280"%3EFoto 4%3C/text%3E%3C/svg%3E',
+    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="1067"%3E%3Crect fill="%23fed7aa" width="600" height="1067"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="40" fill="%236b7280"%3EFoto 5%3C/text%3E%3C/svg%3E',
+    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="1067"%3E%3Crect fill="%23bbf7d0" width="600" height="1067"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="40" fill="%236b7280"%3EFoto 6%3C/text%3E%3C/svg%3E',
+    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="1067"%3E%3Crect fill="%23fecaca" width="600" height="1067"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="40" fill="%236b7280"%3EFoto 7%3C/text%3E%3C/svg%3E',
   ];
 
   useEffect(() => {
@@ -159,6 +162,9 @@ function App() {
         {/* - Transiciones suaves entre imágenes */}
         {/* - Avance automático cada 4 segundos */}
         <div className="mb-16">
+          <h2 className="font-serif text-3xl md:text-4xl text-center text-gray-800 mb-6 tracking-wide">
+            Recuerdos de nuestro amor
+          </h2>
           <div className="relative w-full">
             {/* Barras de progreso estilo Stories */}
             {/* Muestra el progreso de visualización de cada imagen */}
@@ -185,7 +191,7 @@ function App() {
             {/* Formato vertical 9:16 similar a Stories de Instagram */}
             {/* Los eventos táctiles permiten navegación por gestos de deslizamiento */}
             <div 
-              className="relative overflow-hidden rounded-3xl shadow-2xl"
+              className="relative overflow-hidden rounded-3xl shadow-2xl bg-gray-800"
               style={{ aspectRatio: '9/16' }}
               onTouchStart={onTouchStart}
               onTouchMove={onTouchMove}
