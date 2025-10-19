@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Heart, MapPin, Calendar, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Heart, MapPin, Calendar, Clock, ChevronLeft, ChevronRight, Shirt } from 'lucide-react';
 
 function App() {
   const [guestName, setGuestName] = useState<string>('nuestro invitado especial');
@@ -201,7 +201,7 @@ function App() {
           <div className="w-32 h-1 bg-gradient-to-r from-transparent via-indigo-300 to-transparent mx-auto" />
         </div>
 
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-12 mb-8 border border-indigo-100">
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-12 mb-8 border border-indigo-100" id="invitation-content">
           <div className="text-center mb-12">
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
               Como Miyo y Kiyoka, nuestro amor florece contra todo pronóstico.
@@ -243,12 +243,13 @@ function App() {
             <div className="space-y-6">
               <div className="flex items-start space-x-4">
                 <div className="mt-1 bg-indigo-100 p-3 rounded-lg">
-                  <MapPin className="w-6 h-6 text-indigo-600" />
+                  {/* Icono dresscode: ahora usa Shirt de lucide-react */}
+                  <Shirt className="w-6 h-6 text-indigo-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-800 mb-2 text-lg">Ubicación Sagrada</h3>
-                  <p className="text-gray-600">[Nombre del Lugar]</p>
-                  <p className="text-gray-500 text-sm">[Dirección]</p>
+                  <h3 className="font-semibold text-gray-800 mb-2 text-lg">Dresscode</h3>
+                  <p className="text-gray-600">[Tipo de vestimenta]</p>
+                  <p className="text-gray-500 text-sm">[Detalles de dresscode]</p>
                 </div>
               </div>
 
