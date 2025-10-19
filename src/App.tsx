@@ -50,27 +50,27 @@ function App() {
   // Imágenes del carrusel - Actualmente usa fotos de ejemplo de Unsplash
   // TODO: Reemplazar con fotos reales de la boda
   // Las imágenes del carrusel ahora se toman de la carpeta /public/carousel
-  // Ejemplo: carousel1.jpg, carousel2.jpg, carousel3.jpg...
+  // Ejemplo: carousel1.webp, carousel2.webp, carousel3.webp...
   const carouselImages = [
-    '/carousel/01.jpg',
-    '/carousel/02.jpg',
-    '/carousel/03.jpg',
-    '/carousel/04.jpg',
-    '/carousel/06.jpg',
-    '/carousel/07.jpg',
-    '/carousel/08.jpg',
-    '/carousel/09.jpg',
-    '/carousel/10.jpg',
-    '/carousel/11.jpg',
-    '/carousel/12.jpg',
-    '/carousel/13.jpg',
-    '/carousel/14.jpg',
-    '/carousel/15.jpg',
-    '/carousel/16.jpg',
-    '/carousel/17.jpg',
-    '/carousel/18.jpg',
-    '/carousel/19.jpeg',
-    '/carousel/20.jpg',
+    '/carousel/01.webp',
+    '/carousel/02.webp',
+    '/carousel/03.webp',
+    '/carousel/04.webp',
+    '/carousel/06.webp',
+    '/carousel/07.webp',
+    '/carousel/08.webp',
+    '/carousel/09.webp',
+    '/carousel/10.webp',
+    '/carousel/11.webp',
+    '/carousel/12.webp',
+    '/carousel/13.webp',
+    '/carousel/14.webp',
+    '/carousel/15.webp',
+    '/carousel/16.webp',
+    '/carousel/17.webp',
+    '/carousel/18.webp',
+    '/carousel/19.webp',
+    '/carousel/20.webp',
   ];
 
   useEffect(() => {
