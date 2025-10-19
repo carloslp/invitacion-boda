@@ -49,14 +49,11 @@ function App() {
 
   // Imágenes del carrusel - Actualmente usa fotos de ejemplo de Unsplash
   // TODO: Reemplazar con fotos reales de la boda
+  // Las imágenes del carrusel ahora se toman de la carpeta /public/carousel
+  // Ejemplo: carousel1.jpg, carousel2.jpg, carousel3.jpg...
   const carouselImages = [
-    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="1067"%3E%3Crect fill="%23e5e7eb" width="600" height="1067"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="40" fill="%236b7280"%3EFoto 1%3C/text%3E%3C/svg%3E',
-    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="1067"%3E%3Crect fill="%23ddd6fe" width="600" height="1067"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="40" fill="%236b7280"%3EFoto 2%3C/text%3E%3C/svg%3E',
-    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="1067"%3E%3Crect fill="%23dbeafe" width="600" height="1067"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="40" fill="%236b7280"%3EFoto 3%3C/text%3E%3C/svg%3E',
-    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="1067"%3E%3Crect fill="%23fce7f3" width="600" height="1067"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="40" fill="%236b7280"%3EFoto 4%3C/text%3E%3C/svg%3E',
-    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="1067"%3E%3Crect fill="%23fed7aa" width="600" height="1067"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="40" fill="%236b7280"%3EFoto 5%3C/text%3E%3C/svg%3E',
-    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="1067"%3E%3Crect fill="%23bbf7d0" width="600" height="1067"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="40" fill="%236b7280"%3EFoto 6%3C/text%3E%3C/svg%3E',
-    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="1067"%3E%3Crect fill="%23fecaca" width="600" height="1067"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="40" fill="%236b7280"%3EFoto 7%3C/text%3E%3C/svg%3E',
+    '/carousel/20211215_221135.jpg',
+    '/carousel/IMG_1882.HEIC',
   ];
 
   useEffect(() => {
@@ -416,22 +413,26 @@ function App() {
                   </div>
                 </div>
               ) : (
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <button
-                    onClick={() => handleConfirmation(true)}
-                    disabled={isConfirming || !guestBase64}
-                    className="bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
-                  >
-                    {isConfirming ? 'Confirmando...' : 'Confirmar Asistencia'}
-                  </button>
-                  <button
-                    onClick={() => handleConfirmation(false)}
-                    disabled={isConfirming || !guestBase64}
-                    className="bg-gradient-to-r from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
-                  >
-                    {isConfirming ? 'Enviando...' : 'No gracias, no podré asistir'}
-                  </button>
-                </div>
+                <>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button
+                      onClick={() => handleConfirmation(true)}
+                      disabled={isConfirming || !guestBase64}
+                      className="bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
+                    >
+                      {isConfirming ? 'Confirmando...' : 'Confirmar Asistencia'}
+                    </button>
+                    <button
+                      onClick={() => handleConfirmation(false)}
+                      disabled={isConfirming || !guestBase64}
+                      className="bg-gradient-to-r from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
+                    >
+                      {isConfirming ? 'Enviando...' : 'No gracias, no podré asistir'}
+                    </button>
+                  </div>
+                  {/* Leyenda No niños */}
+                  <div className="mt-4 text-center text-red-500 font-semibold text-base">No niños.</div>
+                </>
               )
             )}
 
