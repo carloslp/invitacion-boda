@@ -33,7 +33,7 @@ function App() {
 
     setIsConfirming(true);
     try {
-      const apiUrl = `https://api.confirmacionboda.com/confirmar?invitado=${guestBase64}`;
+      const apiUrl = `https://n8n.paas.oracle-mty1.juanlopez.dev/webhook-test/boda?invitado=${guestBase64}`;
       const response = await fetch(apiUrl, { method: 'GET' });
       
       if (response.status === 200) {
