@@ -6,7 +6,7 @@ function App() {
   const [guestBase64, setGuestBase64] = useState<string>('');
   const [confirmationStatus, setConfirmationStatus] = useState<'none' | 'confirmed' | 'already-confirmed' | 'declined' | 'already-declined' | 'error'>('none');
   // Fecha de la boda: 19 de octubre de 2025, 20:00 hora local
-  const weddingDate = new Date('2025-10-18T20:00:00');
+  const weddingDate = new Date('2025-11-15T20:00:00');
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
