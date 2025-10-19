@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Heart, MapPin, Calendar, Clock, ChevronDown, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { Heart, MapPin, Calendar, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
 
 function App() {
   const [guestName, setGuestName] = useState<string>('nuestro invitado especial');
   const [guestBase64, setGuestBase64] = useState<string>('');
   const [confirmationStatus, setConfirmationStatus] = useState<'none' | 'confirmed' | 'already-confirmed' | 'declined' | 'already-declined' | 'error'>('none');
   const [isConfirming, setIsConfirming] = useState(false);
-  const [showCarousel, setShowCarousel] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -16,10 +15,10 @@ function App() {
 
   // Sample images - replace with actual wedding photos
   const carouselImages = [
-    'https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=800&fit=crop',
-    'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&h=800&fit=crop',
-    'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1200&h=800&fit=crop',
-    'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1200&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=1067&fit=crop',
+    'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&h=1067&fit=crop',
+    'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&h=1067&fit=crop',
+    'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&h=1067&fit=crop',
   ];
 
   useEffect(() => {
@@ -31,6 +30,15 @@ function App() {
       fetchGuestName(invitadoBase64);
     }
   }, []);
+
+  // Auto-advance carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length);
+    }, 4000); // Change image every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [carouselImages.length]);
 
   const fetchGuestName = async (base64: string) => {
     try {
@@ -74,10 +82,6 @@ function App() {
     setCurrentImageIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
   };
 
-  const closeCarousel = () => {
-    setShowCarousel(false);
-  };
-
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
@@ -103,85 +107,93 @@ function App() {
   };
 
   return (
-    <>
-      {/* Photo Carousel */}
-      {showCarousel && (
-        <div className="fixed inset-0 z-50 bg-black">
-          {/* Carousel Images */}
-          <div 
-            className="relative w-full h-full"
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={onTouchEnd}
-          >
-            <img
-              src={carouselImages[currentImageIndex]}
-              alt={`Wedding photo ${currentImageIndex + 1}`}
-              className="w-full h-full object-cover"
-            />
-            
-            {/* Close Button */}
-            <button
-              onClick={closeCarousel}
-              className="absolute top-4 right-4 bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 z-10"
-              aria-label="Cerrar carrusel"
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            {/* Navigation Arrows */}
-            <button
-              onClick={previousImage}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all duration-300"
-              aria-label="Imagen anterior"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            
-            <button
-              onClick={nextImage}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all duration-300"
-              aria-label="Siguiente imagen"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-
-            {/* Image Counter */}
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-white/90 px-4 py-2 rounded-full text-gray-800 font-semibold">
-              {currentImageIndex + 1} / {carouselImages.length}
-            </div>
-
-            {/* Down Button (Bottom Right) */}
-            <button
-              onClick={closeCarousel}
-              className="absolute bottom-8 right-8 bg-white/90 hover:bg-white text-gray-800 p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 animate-bounce"
-              aria-label="Bajar al contenido"
-            >
-              <ChevronDown className="w-8 h-8" />
-            </button>
-
-            {/* Touch indicators for mobile */}
-            <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex space-x-2">
-              {carouselImages.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentImageIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === currentImageIndex ? 'bg-white w-8' : 'bg-white/50'
-                  }`}
-                  aria-label={`Ir a imagen ${index + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Main Content */}
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50">
       <div className="absolute inset-0 opacity-5 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTAgMTBhNSA1IDAgMCAxIDUgNXY3MGE1IDUgMCAwIDEtNSA1IDUgNSAwIDAgMS01LTVWMTVhNSA1IDAgMCAxIDUtNXoiIGZpbGw9IiNmZjliYjAiLz48L3N2Zz4=')]" />
 
       <div className="container mx-auto px-4 py-12 max-w-4xl relative z-10">
+        {/* Instagram Stories Style Carousel */}
+        <div className="mb-16 flex justify-center">
+          <div className="relative w-full max-w-md">
+            {/* Story progress bars */}
+            <div className="absolute top-2 left-2 right-2 z-20 flex gap-1">
+              {carouselImages.map((_, index) => (
+                <div
+                  key={index}
+                  className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden"
+                >
+                  <div
+                    className={`h-full bg-white transition-all duration-300 ${
+                      index === currentImageIndex ? 'w-full animate-progress' : index < currentImageIndex ? 'w-full' : 'w-0'
+                    }`}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Carousel Container */}
+            <div 
+              className="relative overflow-hidden rounded-3xl shadow-2xl"
+              style={{ aspectRatio: '9/16' }}
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
+            >
+              {/* Images with animation */}
+              <div className="relative w-full h-full">
+                {carouselImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+                      index === currentImageIndex
+                        ? 'opacity-100 scale-100'
+                        : index < currentImageIndex
+                        ? 'opacity-0 scale-95 -translate-x-full'
+                        : 'opacity-0 scale-95 translate-x-full'
+                    }`}
+                  >
+                    <img
+                      src={image}
+                      alt={`Wedding photo ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Navigation Arrows */}
+              <button
+                onClick={previousImage}
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 opacity-0 hover:opacity-100 group-hover:opacity-100"
+                aria-label="Imagen anterior"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              
+              <button
+                onClick={nextImage}
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 opacity-0 hover:opacity-100 group-hover:opacity-100"
+                aria-label="Siguiente imagen"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+
+              {/* Touch indicators */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                {carouselImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentImageIndex ? 'bg-white w-8' : 'bg-white/50'
+                    }`}
+                    aria-label={`Ir a imagen ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="text-center mb-16 space-y-6">
           <div className="inline-block">
             <div className="w-24 h-24 mx-auto mb-6 relative">
@@ -342,7 +354,6 @@ function App() {
         </div>
       </div>
     </div>
-    </>
   );
 }
 
