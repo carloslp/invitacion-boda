@@ -2,6 +2,126 @@ import { useEffect, useState } from 'react';
 import { Heart, Calendar, Clock, ChevronLeft, ChevronRight, Shirt } from 'lucide-react';
 
 function App() {
+  // Genera pétalos animados
+  // Sakura Petal Component
+  const SakuraPetal = ({ style, swayClass }: { style: React.CSSProperties, swayClass: string }) => (
+    <svg
+      className={`absolute sakura-petal ${swayClass}`}
+      style={style}
+      width="32" height="32" viewBox="0 0 32 32" fill="none"
+    >
+      <ellipse cx="16" cy="16" rx="10" ry="16" fill="#a78bfa" />
+      <ellipse cx="16" cy="16" rx="7" ry="11" fill="#c4b5fd" />
+    </svg>
+  );
+
+  // Sakura Rain Animation
+  const PetalRain = () => {
+    // Más pétalos y mejor distribución para cubrir toda la página
+    const petals = Array.from({ length: 120 }, (_, i) => {
+      const fallDuration = 16 + Math.random() * 12;
+      const delay = Math.random() * 12;
+      // Distribución horizontal y vertical más uniforme
+      const left = ((i % 24) * (100 / 24)) + Math.random() * 2.5;
+      const top = -(Math.floor(i / 24) * 8 + Math.random() * 8);
+      const swayClass = `sway-${i % 9}`;
+      return (
+        <SakuraPetal
+          key={i}
+          style={{
+            left: `${left}vw`,
+            top: `${top}vh`,
+            width: `${18 + Math.random() * 18}px`,
+            height: `${26 + Math.random() * 14}px`,
+            opacity: 0.7 + Math.random() * 0.3,
+            animation: `fall ${fallDuration}s linear ${delay}s infinite, blow-soft-right ${fallDuration}s linear ${delay}s infinite`,
+          }}
+          swayClass={swayClass}
+        />
+      );
+    });
+    return (
+      <div className="fixed inset-0 pointer-events-none z-0">
+        {petals}
+        <style>{`
+          @keyframes fall {
+            0% { opacity: 0.9; top: 0; }
+            100% { opacity: 0.2; top: 100%; }
+          }
+          @keyframes blow-soft-right {
+            0% { margin-left: 0; }
+            100% { margin-left: 50%; }
+          }
+          @keyframes blow-soft-left {
+            0% { margin-left: 0; }
+            100% { margin-left: -50%; }
+          }
+          @keyframes blow-medium-right {
+            0% { margin-left: 0; }
+            100% { margin-left: 100%; }
+          }
+          @keyframes blow-medium-left {
+            0% { margin-left: 0; }
+            100% { margin-left: -100%; }
+          }
+          @keyframes sway-0 {
+            0% { transform: rotate(-5deg); }
+            40% { transform: rotate(28deg); }
+            100% { transform: rotate(3deg); }
+          }
+          @keyframes sway-1 {
+            0% { transform: rotate(10deg); }
+            40% { transform: rotate(43deg); }
+            100% { transform: rotate(15deg); }
+          }
+          @keyframes sway-2 {
+            0% { transform: rotate(15deg); }
+            40% { transform: rotate(56deg); }
+            100% { transform: rotate(22deg); }
+          }
+          @keyframes sway-3 {
+            0% { transform: rotate(25deg); }
+            40% { transform: rotate(74deg); }
+            100% { transform: rotate(37deg); }
+          }
+          @keyframes sway-4 {
+            0% { transform: rotate(40deg); }
+            40% { transform: rotate(68deg); }
+            100% { transform: rotate(25deg); }
+          }
+          @keyframes sway-5 {
+            0% { transform: rotate(50deg); }
+            40% { transform: rotate(78deg); }
+            100% { transform: rotate(40deg); }
+          }
+          @keyframes sway-6 {
+            0% { transform: rotate(65deg); }
+            40% { transform: rotate(92deg); }
+            100% { transform: rotate(58deg); }
+          }
+          @keyframes sway-7 {
+            0% { transform: rotate(72deg); }
+            40% { transform: rotate(118deg); }
+            100% { transform: rotate(68deg); }
+          }
+          @keyframes sway-8 {
+            0% { transform: rotate(94deg); }
+            40% { transform: rotate(136deg); }
+            100% { transform: rotate(82deg); }
+          }
+          .sakura-petal.sway-0 { animation: sway-0 6s ease-in-out infinite; }
+          .sakura-petal.sway-1 { animation: sway-1 7s ease-in-out infinite; }
+          .sakura-petal.sway-2 { animation: sway-2 8s ease-in-out infinite; }
+          .sakura-petal.sway-3 { animation: sway-3 6.5s ease-in-out infinite; }
+          .sakura-petal.sway-4 { animation: sway-4 7.5s ease-in-out infinite; }
+          .sakura-petal.sway-5 { animation: sway-5 8.5s ease-in-out infinite; }
+          .sakura-petal.sway-6 { animation: sway-6 7.2s ease-in-out infinite; }
+          .sakura-petal.sway-7 { animation: sway-7 8.2s ease-in-out infinite; }
+          .sakura-petal.sway-8 { animation: sway-8 7.8s ease-in-out infinite; }
+        `}</style>
+      </div>
+    );
+  };
   // Estado para número de acompañantes
   // companions: número de acompañantes (no incluye al invitado principal)
   const [companions, setCompanions] = useState<number>(0);
@@ -228,7 +348,12 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 flex flex-col relative overflow-hidden">
+      {/* Sakura Petal Rain */}
+      <PetalRain />
+      {/* Imágenes decorativas de imgur */}
+      <img src="https://i.imgur.com/dGOOfnA.png" alt="image-top-right" className="fixed top-0 right-0 w-40 md:w-64 z-10 pointer-events-none select-none" style={{maxWidth:'30vw'}} />
+      <img src="https://i.imgur.com/t6ffnbn.png" alt="image-top-left" className="fixed top-0 left-0 w-40 md:w-64 z-10 pointer-events-none select-none" style={{maxWidth:'30vw'}} />
       <div className="absolute inset-0 opacity-5 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTAgMTBhNSA1IDAgMCAxIDUgNXY3MGE1IDUgMCAwIDEtNSA1IDUgNSAwIDAgMS01LTVWMTVhNSA1IDAgMCAxIDUtNXoiIGZpbGw9IiNmZjliYjAiLz48L3N2Zz4=')]"></div>
       <div className="flex-1 flex flex-col justify-center items-center">
         <div className="w-full max-w-4xl px-4 py-8 md:py-12">
@@ -244,7 +369,7 @@ function App() {
             </div>
 
             <h1 className="font-serif text-4xl md:text-6xl font-light text-gray-800 tracking-wide">
-              ¡Nuestra Felicidad Comienza Aquí!
+              Las verdaderas historias de amor nunca tienen un final
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 font-light italic">
               Juan & Wendy
