@@ -230,6 +230,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 flex flex-col relative overflow-hidden">
+
       {/* Imágenes decorativas de imgur */}
       <img src="https://i.imgur.com/dGOOfnA.png" alt="image-top-right" className="fixed top-0 right-0 w-40 md:w-64 z-10 pointer-events-none select-none" style={{maxWidth:'30vw'}} />
       <img src="https://i.imgur.com/t6ffnbn.png" alt="image-top-left" className="fixed top-0 left-0 w-40 md:w-64 z-10 pointer-events-none select-none" style={{maxWidth:'30vw'}} />
@@ -266,7 +267,12 @@ function App() {
                 A veces, lo que empieza como una locura se convierte en lo mejor de tu vida.
                 <br />
                 <span className="text-indigo-600 font-semibold">¡Sé testigo de nuestro día especial!</span>
+                                
               </p>
+    {/* Reproductor de música */}
+      <audio src="/carousel/videoplayback.ogg" autoPlay loop className="hidden">
+        Tu navegador no soporta audio HTML5.
+      </audio>
             </div>
 
             <div className="border-t border-b border-indigo-200 py-8 my-8">
