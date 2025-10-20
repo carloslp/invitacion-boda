@@ -263,7 +263,7 @@ function App() {
 
             <div className="text-center mb-12">
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                Como Miyo y Kiyoka, nuestro amor florece contra todo pronóstico.
+                A veces, lo que empieza como una locura se convierte en lo mejor de tu vida.
                 <br />
                 <span className="text-indigo-600 font-semibold">¡Sé testigo de nuestro día especial!</span>
               </p>
@@ -271,7 +271,7 @@ function App() {
 
             <div className="border-t border-b border-indigo-200 py-8 my-8">
               <p className="text-center text-gray-700 text-lg leading-relaxed">
-                Con la pureza de un corazón que busca su verdadero hogar, nos llena de alegría invitarte,{' '}
+                Porque el amor merece ser celebrado, nos llena de alegría invitarte,{' '}
                 <span className="font-semibold text-indigo-600 text-xl">{guestName}</span>, a celebrar el inicio de nuestro 'Matrimonio Feliz'.
               </p>
             </div>
@@ -283,10 +283,14 @@ function App() {
                     <Calendar className="w-6 h-6 text-indigo-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-800 mb-2 text-lg">Día de la Ceremonia</h3>
-                    <p className="text-gray-600">[Fecha]</p>
+                    <h3 className="font-semibold text-gray-800 mb-2 text-lg">Fecha de la Ceremonia</h3>
+                    <p className="text-gray-600">15 de Noviembre, 2025</p>
                   </div>
                 </div>
+
+              </div>
+
+              <div className="space-y-6">
 
                 <div className="flex items-start space-x-4">
                   <div className="mt-1 bg-indigo-100 p-3 rounded-lg">
@@ -294,34 +298,10 @@ function App() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800 mb-2 text-lg">Hora</h3>
-                    <p className="text-gray-600">[Hora]</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="mt-1 bg-indigo-100 p-3 rounded-lg">
-                    {/* Icono dresscode: ahora usa Shirt de lucide-react */}
-                    <Shirt className="w-6 h-6 text-indigo-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-800 mb-2 text-lg">Dresscode</h3>
-                    <p className="text-gray-600">[Tipo de vestimenta]</p>
-                    <p className="text-gray-500 text-sm">[Detalles de dresscode]</p>
+                    <p className="text-gray-600">6 PM</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="mt-1 bg-indigo-100 p-3 rounded-lg">
-                    <Heart className="w-6 h-6 text-indigo-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-800 mb-2 text-lg">Celebración del Vínculo</h3>
-                    <p className="text-gray-600">[Nombre del Lugar de la Recepción]</p>
-                    <p className="text-gray-500 text-sm">[Dirección]</p>
-                  </div>
-                </div>
               </div>
             </div>
 
