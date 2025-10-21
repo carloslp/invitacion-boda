@@ -270,9 +270,11 @@ function App() {
                                 
               </p>
     {/* Reproductor de música */}
-      <audio src="/carousel/videoplayback.ogg" autoPlay loop className="hidden">
-        Tu navegador no soporta audio HTML5.
-      </audio>
+      <div className="flex justify-center w-full mb-4 pt-10">
+        <audio src="/carousel/videoplayback.ogg" autoPlay loop controls className="bg-white/80 rounded-full shadow-lg" style={{width:'320px', maxWidth:'90vw'}}>
+          Tu navegador no soporta audio HTML5.
+        </audio>
+      </div>
             </div>
 
             <div className="border-t border-b border-indigo-200 py-8 my-8">
