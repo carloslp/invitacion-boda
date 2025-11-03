@@ -12,7 +12,7 @@ function App() {
   const [guestBase64, setGuestBase64] = useState<string>('');
   const [confirmationStatus, setConfirmationStatus] = useState<'none' | 'confirmed' | 'already-confirmed' | 'declined' | 'already-declined' | 'error'>('none');
   // Fecha de la boda: 19 de octubre de 2025, 20:00 hora local
-  const weddingDate = new Date('2025-11-15T20:00:00');
+  const weddingDate = new Date('2025-11-29T20:00:00');
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
@@ -229,70 +229,69 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 flex flex-col relative overflow-hidden">
+  <div className="min-h-screen bg-gradient-to-br from-[#F8F7F5] via-[#F8F7F5] to-[#B8A99A] flex flex-col relative overflow-hidden">
 
       {/* Imágenes decorativas de imgur */}
-      <img src="https://i.imgur.com/dGOOfnA.png" alt="image-top-right" className="fixed top-0 right-0 w-40 md:w-64 z-10 pointer-events-none select-none" style={{maxWidth:'30vw'}} />
-      <img src="https://i.imgur.com/t6ffnbn.png" alt="image-top-left" className="fixed top-0 left-0 w-40 md:w-64 z-10 pointer-events-none select-none" style={{maxWidth:'30vw'}} />
-      <div className="absolute inset-0 opacity-5 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTAgMTBhNSA1IDAgMCAxIDUgNXY3MGE1IDUgMCAwIDEtNSA1IDUgNSAwIDAgMS01LTVWMTVhNSA1IDAgMCAxIDUtNXoiIGZpbGw9IiNmZjliYjAiLz48L3N2Zz4=')]"></div>
+  <img src="https://i.imgur.com/dGOOfnA.png" alt="image-top-right" className="fixed top-0 right-0 w-40 md:w-64 z-10 pointer-events-none select-none" style={{maxWidth:'30vw'}} />
+  <img src="https://i.imgur.com/t6ffnbn.png" alt="image-top-left" className="fixed top-0 left-0 w-40 md:w-64 z-10 pointer-events-none select-none" style={{maxWidth:'30vw'}} />
+  <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTAgMTBhNSA1IDAgMCAxIDUgNXY3MGE1IDUgMCAwIDEtNSA1IDUgNSAwIDAgMS01LTVWMTVhNSA1IDAgMCAxIDUtNXoiIGZpbGw9IiM4QTlBOEMiLz48L3N2Zz4=')]"></div>
       <div className="flex-1 flex flex-col justify-center items-center">
         <div className="w-full max-w-4xl px-4 py-8 md:py-12">
 
           <div className="text-center mb-16 space-y-6">
             <div className="inline-block">
               <div className="w-24 h-24 mx-auto mb-6 relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-300 to-blue-400 rounded-full blur-xl opacity-50 animate-pulse" />
-                <div className="relative bg-white rounded-full w-full h-full flex items-center justify-center shadow-lg">
-                  <Heart className="w-12 h-12 text-indigo-400 fill-indigo-400" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#8A9A8C] to-[#5A665B] rounded-full blur-xl opacity-50 animate-pulse" />
+                <div className="relative bg-[#F8F7F5] rounded-full w-full h-full flex items-center justify-center shadow-lg">
+                  <Heart className="w-12 h-12 text-[#5A665B] fill-[#8A9A8C]" />
                 </div>
               </div>
             </div>
 
-            <h1 className="font-serif text-4xl md:text-6xl font-light text-gray-800 tracking-wide">
+            <h1 className="font-serif text-4xl md:text-6xl font-light text-[#333333] tracking-wide">
               Las verdaderas historias de amor nunca tienen un final
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 font-light italic">
+            <p className="text-xl md:text-2xl text-[#5A665B] font-light italic">
               Juan & Wendy
             </p>
-            <div className="w-32 h-1 bg-gradient-to-r from-transparent via-indigo-300 to-transparent mx-auto" />
+            <div className="w-32 h-1 bg-gradient-to-r from-transparent via-[#8A9A8C] to-transparent mx-auto" />
           </div>
 
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-12 mb-8 border border-indigo-100" id="invitation-content">
+          <div className="bg-[#F8F7F5]/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-12 mb-8 border border-[#B8A99A]" id="invitation-content">
             {/* Sección Google Maps */}
 
             {/* Sección Dresscode destacada */}
 
             <div className="text-center mb-12">
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+              <p className="text-lg md:text-xl text-[#5A665B] leading-relaxed">
                 A veces, lo que empieza como una locura se convierte en lo mejor de tu vida.
                 <br />
-                <span className="text-indigo-600 font-semibold">¡Sé testigo de nuestro día especial!</span>
-                                
+                <span className="text-[#5A665B] font-semibold">¡Sé testigo de nuestro día especial!</span>
               </p>
-    {/* Reproductor de música */}
-      <div className="flex justify-center w-full mb-4 pt-10">
-        <audio src="/carousel/videoplayback.ogg" autoPlay loop controls className="bg-white/80 rounded-full shadow-lg" style={{width:'320px', maxWidth:'90vw'}}>
-          Tu navegador no soporta audio HTML5.
-        </audio>
-      </div>
+              {/* Reproductor de música */}
+              <div className="flex justify-center w-full mb-4 pt-10">
+                <audio src="/carousel/videoplayback.ogg" autoPlay loop controls className="bg-[#F8F7F5]/80 rounded-full shadow-lg" style={{width:'320px', maxWidth:'90vw'}}>
+                  Tu navegador no soporta audio HTML5.
+                </audio>
+              </div>
             </div>
 
-            <div className="border-t border-b border-indigo-200 py-8 my-8">
-              <p className="text-center text-gray-700 text-lg leading-relaxed">
+            <div className="border-t border-b border-[#B8A99A] py-8 my-8">
+              <p className="text-center text-[#333333] text-lg leading-relaxed">
                 Porque el amor merece ser celebrado, nos llena de alegría invitarte,{' '}
-                <span className="font-semibold text-indigo-600 text-xl">{guestName}</span>, a celebrar el inicio de nuestro 'Matrimonio Feliz'.
+                <span className="font-semibold text-[#5A665B] text-xl">{guestName}</span>, a celebrar el inicio de nuestro 'Matrimonio Feliz'.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 mb-12">
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <div className="mt-1 bg-indigo-100 p-3 rounded-lg">
-                    <Calendar className="w-6 h-6 text-indigo-600" />
+                  <div className="mt-1 bg-[#8A9A8C]/30 p-3 rounded-lg">
+                    <Calendar className="w-6 h-6 text-[#5A665B]" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-800 mb-2 text-lg">Fecha de la Ceremonia</h3>
-                    <p className="text-gray-600">15 de Noviembre, 2025</p>
+                    <h3 className="font-semibold text-[#333333] mb-2 text-lg">Fecha de la Ceremonia</h3>
+                    <p className="text-[#5A665B]">15 de Noviembre, 2025</p>
                   </div>
                 </div>
 
@@ -301,12 +300,12 @@ function App() {
               <div className="space-y-6">
 
                 <div className="flex items-start space-x-4">
-                  <div className="mt-1 bg-indigo-100 p-3 rounded-lg">
-                    <Clock className="w-6 h-6 text-indigo-600" />
+                  <div className="mt-1 bg-[#8A9A8C]/30 p-3 rounded-lg">
+                    <Clock className="w-6 h-6 text-[#5A665B]" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-800 mb-2 text-lg">Hora</h3>
-                    <p className="text-gray-600">6 PM</p>
+                    <h3 className="font-semibold text-[#333333] mb-2 text-lg">Hora</h3>
+                    <p className="text-[#5A665B]">6 PM</p>
                   </div>
                 </div>
 
@@ -315,11 +314,11 @@ function App() {
 
             <div className="mb-10 flex flex-col items-center border-t border-b border-indigo-200 py-8 my-8">
               <div className="flex items-center gap-3 mb-2">
-                <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-indigo-600" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" /></svg>
-                <span className="text-2xl font-semibold text-gray-800">Ubicación</span>
+                <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#5A665B]" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" /></svg>
+                <span className="text-2xl font-semibold text-[#333333]">Ubicación</span>
               </div>
               <div className="w-full flex flex-col items-center">
-                <div className="rounded-xl overflow-hidden border border-indigo-200 shadow-lg max-w-xl w-full">
+                <div className="rounded-xl overflow-hidden border border-[#B8A99A] shadow-lg max-w-xl w-full">
                   <iframe
                     title="Ubicación del evento"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d584.6036012840692!2d-108.4572463858065!3d25.56070520625849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86bbbfbdb41cb757%3A0x41485fad5b708134!2sEM%20eventos!5e1!3m2!1ses-419!2smx!4v1760939624219!5m2!1ses-419!2smx"
@@ -334,16 +333,16 @@ function App() {
                 {/*               <span className="block mt-2 text-gray-600 text-base">Salón Jardín de los Sueños, CDMX</span>
  */}            </div>
             </div>
-            <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl p-8 mb-12 border border-indigo-200">
-              <h2 className="font-serif text-2xl md:text-3xl text-center text-gray-800 mb-4">Nuestra Historia</h2>
-              <p className="text-center text-gray-700 leading-relaxed italic">
+            <div className="bg-gradient-to-r from-[#F8F7F5] to-[#B8A99A] rounded-xl p-8 mb-12 border border-[#B8A99A]">
+              <h2 className="font-serif text-2xl md:text-3xl text-center text-[#333333] mb-4">Nuestra Historia</h2>
+              <p className="text-center text-[#5A665B] leading-relaxed italic">
                 "Nuestra historia, como un delicado haiku, se ha tejido con hilos de comprensión y paciencia.
                 Hemos encontrado en el otro un refugio y un futuro juntos."
               </p>
             </div>
             {/* Slider integrado en la invitación, adaptado al alto de pantalla */}
             <div className="mb-10 flex flex-col items-center">
-              <h2 className="font-serif text-3xl md:text-4xl text-center text-gray-800 mb-6 tracking-wide">
+              <h2 className="font-serif text-3xl md:text-4xl text-center text-[#333333] mb-6 tracking-wide">
                 Recuerdos de nuestro amor
               </h2>
               <div className="relative w-full max-w-md" style={{ height: 'min(70vh, 600px)' }}>
@@ -352,10 +351,10 @@ function App() {
                   {carouselImages.map((_, index) => (
                     <div
                       key={index}
-                      className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden"
+                      className="flex-1 h-1 bg-[#8A9A8C]/30 rounded-full overflow-hidden"
                     >
                       <div
-                        className={`h-full bg-white transition-all duration-300 ${index === currentImageIndex ? 'w-full animate-progress' : index < currentImageIndex ? 'w-full' : 'w-0'
+                        className={`h-full bg-[#8A9A8C] transition-all duration-300 ${index === currentImageIndex ? 'w-full animate-progress' : index < currentImageIndex ? 'w-full' : 'w-0'
                           }`}
                       />
                     </div>
@@ -390,14 +389,14 @@ function App() {
                   {/* Flechas de navegación */}
                   <button
                     onClick={previousImage}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 opacity-0 hover:opacity-100 group-hover:opacity-100"
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-[#F8F7F5]/80 hover:bg-[#F8F7F5] text-[#5A665B] p-2 rounded-full shadow-lg transition-all duration-300 opacity-0 hover:opacity-100 group-hover:opacity-100"
                     aria-label="Imagen anterior"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <button
                     onClick={nextImage}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 opacity-0 hover:opacity-100 group-hover:opacity-100"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#F8F7F5]/80 hover:bg-[#F8F7F5] text-[#5A665B] p-2 rounded-full shadow-lg transition-all duration-300 opacity-0 hover:opacity-100 group-hover:opacity-100"
                     aria-label="Siguiente imagen"
                   >
                     <ChevronRight className="w-5 h-5" />
@@ -408,7 +407,7 @@ function App() {
                       <button
                         key={index}
                         onClick={() => setCurrentImageIndex(index)}
-                        className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentImageIndex ? 'bg-white w-8' : 'bg-white/50'
+                        className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentImageIndex ? 'bg-[#8A9A8C] w-8' : 'bg-[#8A9A8C]/30'
                           }`}
                         aria-label={`Ir a imagen ${index + 1}`}
                       />
@@ -420,12 +419,12 @@ function App() {
 
             <div className="mb-10 flex flex-col items-center">
               <div className="flex items-center gap-3 mb-2">
-                <Shirt className="w-8 h-8 text-indigo-600" />
-                <span className="text-2xl font-semibold text-gray-800">Dresscode</span>
+                <Shirt className="w-8 h-8 text-[#5A665B]" />
+                <span className="text-2xl font-semibold text-[#333333]">Dresscode</span>
               </div>
-              <div className="bg-indigo-50 border border-indigo-200 rounded-xl px-6 py-4 text-center max-w-md">
-                <span className="block text-lg text-indigo-700 font-medium">Semi-formal / Casual</span>
-                <span className="block text-gray-600 mt-2">Mujeres: vestido corto, falda o pantalón elegante. Hombres: camisa, pantalón de vestir o casual, opcional saco. No es necesario corbata ni vestido largo. No blanco.</span>
+              <div className="bg-[#F8F7F5] border border-[#B8A99A] rounded-xl px-6 py-4 text-center max-w-md">
+                <span className="block text-lg text-[#5A665B] font-medium">Semi-formal / Casual</span>
+                <span className="block text-[#8A9A8C] mt-2">Mujeres: vestido corto, falda o pantalón elegante. Hombres: camisa, pantalón de vestir o casual, opcional saco. No es necesario corbata ni vestido largo. No blanco.</span>
               </div>
             </div>
             {/* Aquí va el resto del contenido de la invitación, dentro del mismo div raíz */}
@@ -433,7 +432,7 @@ function App() {
             {/* ...existing code... */}
             {/* Contador regresivo para la fecha de la boda - justo arriba de los botones */}
             <div className="flex flex-col items-center pb-6">
-              <div className="inline-flex items-center space-x-4 bg-indigo-50 text-indigo-700 px-8 py-4 rounded-full text-lg font-semibold shadow-md" style={{ marginBottom: '8px' }}>
+              <div className="inline-flex items-center space-x-4 bg-[#8A9A8C]/10 text-[#5A665B] px-8 py-4 rounded-full text-lg font-semibold shadow-md" style={{ marginBottom: '8px' }}>
                 <Calendar className="w-5 h-5" />
                 <span>
                   Faltan&nbsp;
@@ -444,28 +443,28 @@ function App() {
                 </span>
               </div>
               {countdown.finished && (
-                <div className="mt-2 text-red-600 font-bold">¡Ya comenzó la boda!</div>
+                <div className="mt-2 text-[#B8A99A] font-bold">¡Ya comenzó la boda!</div>
               )}
             </div>
             <div className="text-center">
               {!countdown.finished && (
                 confirmationStatus === 'confirmed' ? (
-                  <div className="inline-flex items-center space-x-2 bg-green-100 text-green-700 px-8 py-4 rounded-full text-lg font-semibold">
-                    <Heart className="w-5 h-5 fill-green-700" />
+                  <div className="inline-flex items-center space-x-2 bg-[#8A9A8C]/20 text-[#5A665B] px-8 py-4 rounded-full text-lg font-semibold">
+                    <Heart className="w-5 h-5 fill-[#5A665B]" />
                     <span>¡Invitación confirmada!</span>
                   </div>
                 ) : confirmationStatus === 'already-confirmed' ? (
-                  <div className="inline-flex items-center space-x-2 bg-yellow-100 text-yellow-700 px-8 py-4 rounded-full text-lg font-semibold">
-                    <Heart className="w-5 h-5 fill-yellow-700" />
+                  <div className="inline-flex items-center space-x-2 bg-[#B8A99A]/30 text-[#5A665B] px-8 py-4 rounded-full text-lg font-semibold">
+                    <Heart className="w-5 h-5 fill-[#B8A99A]" />
                     <span>Ya habías confirmado la invitación</span>
                   </div>
                 ) : confirmationStatus === 'declined' ? (
-                  <div className="inline-flex items-center space-x-2 bg-gray-100 text-gray-700 px-8 py-4 rounded-full text-lg font-semibold">
+                  <div className="inline-flex items-center space-x-2 bg-[#8A9A8C]/10 text-[#333333] px-8 py-4 rounded-full text-lg font-semibold">
                     <Heart className="w-5 h-5" />
                     <span>Lamentamos que no puedas asistir</span>
                   </div>
                 ) : confirmationStatus === 'already-declined' ? (
-                  <div className="inline-flex items-center space-x-2 bg-gray-100 text-gray-700 px-8 py-4 rounded-full text-lg font-semibold">
+                  <div className="inline-flex items-center space-x-2 bg-[#8A9A8C]/10 text-[#333333] px-8 py-4 rounded-full text-lg font-semibold">
                     <Heart className="w-5 h-5" />
                     <span>Ya habías indicado que no podías asistir</span>
                   </div>
@@ -478,14 +477,14 @@ function App() {
                       <button
                         onClick={() => handleConfirmation(true)}
                         disabled={isConfirming || !guestBase64}
-                        className="bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
+                        className="bg-gradient-to-r from-[#8A9A8C] to-[#5A665B] hover:from-[#5A665B] hover:to-[#8A9A8C] disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
                       >
                         {isConfirming ? 'Confirmando...' : 'Reintentar Confirmar'}
                       </button>
                       <button
                         onClick={() => handleConfirmation(false)}
                         disabled={isConfirming || !guestBase64}
-                        className="bg-gradient-to-r from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
+                        className="bg-gradient-to-r from-[#B8A99A] to-[#333333] hover:from-[#333333] hover:to-[#B8A99A] disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
                       >
                         {isConfirming ? 'Enviando...' : 'Reintentar Declinar'}
                       </button>
@@ -495,7 +494,7 @@ function App() {
                   <>
                     {/* Selector de acompañantes solo si va a confirmar asistencia */}
                     <div className="mb-6 flex flex-col items-center">
-                      <span className="block mb-2 text-lg text-gray-700 font-semibold">¿Cuántos asistirán contigo? <span className="text-sm font-normal text-gray-500">(incluyéndote a ti)</span></span>
+                      <span className="block mb-2 text-lg text-[#333333] font-semibold">¿Cuántos asistirán contigo? <span className="text-sm font-normal text-[#8A9A8C]">(incluyéndote a ti)</span></span>
                       <div className="flex flex-row gap-4 justify-center">
                         {opcionesInvitados.map((total) => (
                           <label key={total} className="inline-flex items-center cursor-pointer">
@@ -505,34 +504,34 @@ function App() {
                               value={total}
                               checked={companions + 1 === total}
                               onChange={() => setCompanions(total - 1)}
-                              className="form-radio h-5 w-5 text-indigo-600 focus:ring-indigo-400"
+                              className="form-radio h-5 w-5 text-[#5A665B] focus:ring-[#8A9A8C]"
                             />
-                            <span className="ml-2 text-base text-gray-700">
+                            <span className="ml-2 text-base text-[#5A665B]">
                               {total === 1 ? 'Solo yo' : `${total - 1} Acompañante y Yo`}
                             </span>
                           </label>
                         ))}
                       </div>
-                      <span className="text-sm text-gray-500 mt-2">Total de invitados: {companions + 1}</span>
+                      <span className="text-sm text-[#8A9A8C] mt-2">Total de invitados: {companions + 1}</span>
                     </div>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                       <button
                         onClick={() => handleConfirmation(true)}
                         disabled={isConfirming || !guestBase64}
-                        className="bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
+                        className="bg-gradient-to-r from-[#8A9A8C] to-[#5A665B] hover:from-[#5A665B] hover:to-[#8A9A8C] disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
                       >
                         {isConfirming ? 'Confirmando...' : 'Confirmar Asistencia'}
                       </button>
                       <button
                         onClick={() => handleConfirmation(false)}
                         disabled={isConfirming || !guestBase64}
-                        className="bg-gradient-to-r from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
+                        className="bg-gradient-to-r from-[#B8A99A] to-[#333333] hover:from-[#333333] hover:to-[#B8A99A] disabled:from-gray-300 disabled:to-gray-400 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:cursor-not-allowed disabled:transform-none"
                       >
                         {isConfirming ? 'Enviando...' : 'No gracias, no podré asistir'}
                       </button>
                     </div>
                     {/* Leyenda No niños */}
-                    <div className="mt-4 text-center text-red-500 font-semibold text-base">No niños.</div>
+                    <div className="mt-4 text-center text-[#B8A99A] font-semibold text-base">No niños.</div>
                   </>
                 )
               )}
@@ -540,7 +539,7 @@ function App() {
             </div>
           </div>
 
-          <div className="text-center text-gray-500 text-sm">
+          <div className="text-center text-[#8A9A8C] text-sm">
             <p className="font-light">Con todo nuestro amor y gratitud</p>
           </div>
         </div> {/* cierre de w-full max-w-4xl px-4 py-8 md:py-12 */}
