@@ -321,7 +321,7 @@ function App() {
                 <div className="rounded-xl overflow-hidden border border-[#B8A99A] shadow-lg max-w-xl w-full">
                   <iframe
                     title="Ubicación del evento"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d584.6036012840692!2d-108.4572463858065!3d25.56070520625849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86bbbfbdb41cb757%3A0x41485fad5b708134!2sEM%20eventos!5e1!3m2!1ses-419!2smx!4v1760939624219!5m2!1ses-419!2smx"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1325.0575298417411!2d-108.48842167270269!3d25.561716196559328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86bbbfc94daa9c9b%3A0xba9ad04f5db4481e!2sMaluz%20Eventos%20sociales!5e1!3m2!1ses!2smx!4v1762144162520!5m2!1ses!2smx"
                     width="100%"
                     height="320"
                     style={{ border: 0 }}
