@@ -12,7 +12,7 @@ function App() {
   const [guestBase64, setGuestBase64] = useState<string>('');
   const [confirmationStatus, setConfirmationStatus] = useState<'none' | 'confirmed' | 'already-confirmed' | 'declined' | 'already-declined' | 'error'>('none');
   // Fecha de la boda: 19 de octubre de 2025, 20:00 hora local
-  const weddingDate = new Date('2025-11-29T20:00:00');
+  const weddingDate = new Date('2025-11-29T18:00:00');
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
@@ -232,8 +232,8 @@ function App() {
   <div className="min-h-screen bg-gradient-to-br from-[#F8F7F5] via-[#F8F7F5] to-[#B8A99A] flex flex-col relative overflow-hidden">
 
       {/* Imágenes decorativas de imgur */}
-  <img src="https://i.imgur.com/dGOOfnA.png" alt="image-top-right" className="fixed top-0 right-0 w-40 md:w-64 z-10 pointer-events-none select-none" style={{maxWidth:'30vw'}} />
-  <img src="https://i.imgur.com/t6ffnbn.png" alt="image-top-left" className="fixed top-0 left-0 w-40 md:w-64 z-10 pointer-events-none select-none" style={{maxWidth:'30vw'}} />
+  {/* <img src="https://i.imgur.com/dGOOfnA.png" alt="image-top-right" className="fixed top-0 right-0 w-40 md:w-64 z-10 pointer-events-none select-none" style={{maxWidth:'30vw'}} />
+  <img src="https://i.imgur.com/t6ffnbn.png" alt="image-top-left" className="fixed top-0 left-0 w-40 md:w-64 z-10 pointer-events-none select-none" style={{maxWidth:'30vw'}} /> */}
   <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTAgMTBhNSA1IDAgMCAxIDUgNXY3MGE1IDUgMCAwIDEtNSA1IDUgNSAwIDAgMS01LTVWMTVhNSA1IDAgMCAxIDUtNXoiIGZpbGw9IiM4QTlBOEMiLz48L3N2Zz4=')]"></div>
       <div className="flex-1 flex flex-col justify-center items-center">
         <div className="w-full max-w-4xl px-4 py-8 md:py-12">
@@ -252,7 +252,7 @@ function App() {
               Las verdaderas historias de amor nunca tienen un final
             </h1>
             <p className="text-xl md:text-2xl text-[#5A665B] font-light italic">
-              Juan & Wendy
+              <span style={{fontFamily: 'Dancing Script, Great Vibes, cursive', fontSize: '2.5rem', lineHeight: '1.1'}}>Juan & Wendy</span>
             </p>
             <div className="w-32 h-1 bg-gradient-to-r from-transparent via-[#8A9A8C] to-transparent mx-auto" />
           </div>
@@ -270,16 +270,14 @@ function App() {
               </p>
               {/* Reproductor de música */}
               <div className="flex justify-center w-full mb-4 pt-10">
-                <audio src="/carousel/videoplayback.ogg" autoPlay loop controls className="bg-[#F8F7F5]/80 rounded-full shadow-lg" style={{width:'320px', maxWidth:'90vw'}}>
-                  Tu navegador no soporta audio HTML5.
-                </audio>
+                <audio src="/carousel/videoplayback.ogg" autoPlay loop style={{display: 'none'}} />
               </div>
             </div>
 
             <div className="border-t border-b border-[#B8A99A] py-8 my-8">
               <p className="text-center text-[#333333] text-lg leading-relaxed">
                 Porque el amor merece ser celebrado, nos llena de alegría invitarte,{' '}
-                <span className="font-semibold text-[#5A665B] text-xl">{guestName}</span>, a celebrar el inicio de nuestro 'Matrimonio Feliz'.
+                <span className="font-semibold text-[#5A665B] text-xl">{guestName}</span>, a celebrar el inicio de nuestro matrimonio.
               </p>
             </div>
 
@@ -291,7 +289,7 @@ function App() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-[#333333] mb-2 text-lg">Fecha de la Ceremonia</h3>
-                    <p className="text-[#5A665B]">15 de Noviembre, 2025</p>
+                    <p className="text-[#5A665B]">29 de Noviembre, 2025</p>
                   </div>
                 </div>
 
@@ -334,10 +332,10 @@ function App() {
  */}            </div>
             </div>
             <div className="bg-gradient-to-r from-[#F8F7F5] to-[#B8A99A] rounded-xl p-8 mb-12 border border-[#B8A99A]">
-              <h2 className="font-serif text-2xl md:text-3xl text-center text-[#333333] mb-4">Nuestra Historia</h2>
               <p className="text-center text-[#5A665B] leading-relaxed italic">
-                "Nuestra historia, como un delicado haiku, se ha tejido con hilos de comprensión y paciencia.
-                Hemos encontrado en el otro un refugio y un futuro juntos."
+                "Nuestra historia comenzó como un susurro entre dos almas que buscaban su lugar en el mundo.<br />
+                Con cada mirada y cada gesto, tejimos un refugio de amor, paciencia y sueños compartidos.<br />
+                Hoy, celebramos no solo el destino que nos unió, sino el futuro que construiremos juntos, paso a paso, corazón a corazón."
               </p>
             </div>
             {/* Slider integrado en la invitación, adaptado al alto de pantalla */}
@@ -423,8 +421,8 @@ function App() {
                 <span className="text-2xl font-semibold text-[#333333]">Dresscode</span>
               </div>
               <div className="bg-[#F8F7F5] border border-[#B8A99A] rounded-xl px-6 py-4 text-center max-w-md">
-                <span className="block text-lg text-[#5A665B] font-medium">Semi-formal / Casual</span>
-                <span className="block text-[#8A9A8C] mt-2">Mujeres: vestido corto, falda o pantalón elegante. Hombres: camisa, pantalón de vestir o casual, opcional saco. No es necesario corbata ni vestido largo. No blanco.</span>
+                <span className="block text-lg text-[#5A665B] font-medium">Semi-formal</span>
+                <span className="block text-[#8A9A8C] mt-2">Mujeres: vestido debajo de la rodilla, falda o pantalón elegante. No blanco. <br />Hombres: camisa, pantalón de vestir o casual, saco opcional. No es necesario corbata. </span>
               </div>
             </div>
             {/* Aquí va el resto del contenido de la invitación, dentro del mismo div raíz */}
@@ -532,6 +530,8 @@ function App() {
                     </div>
                     {/* Leyenda No niños */}
                     <div className="mt-4 text-center text-[#B8A99A] font-semibold text-base">No niños.</div>
+                    <div className="mt-4 text-center text-[#B8A99A] font-semibold text-base">Limite de confirmacion 15 de Noviembre, 2025.</div>
+
                   </>
                 )
               )}
