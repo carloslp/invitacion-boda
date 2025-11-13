@@ -422,7 +422,7 @@ function App() {
               </div>
               <div className="bg-[#F8F7F5] border border-[#B8A99A] rounded-xl px-6 py-4 text-center max-w-md">
                 <span className="block text-lg text-[#5A665B] font-medium">Semi-formal</span>
-                <span className="block text-[#8A9A8C] mt-2">Mujeres: vestido debajo de la rodilla, falda o pantalón elegante. No blanco. <br />Hombres: camisa, pantalón de vestir o casual, saco opcional. No es necesario corbata. </span>
+                <span className="block text-[#8A9A8C] mt-2">Mujeres: vestido debajo de la rodilla o largo, falda o pantalón elegante. No blanco. <br />Hombres: camisa, pantalón de vestir o casual, saco opcional. No es necesario corbata. </span>
               </div>
             </div>
             {/* Aquí va el resto del contenido de la invitación, dentro del mismo div raíz */}
