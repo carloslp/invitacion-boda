@@ -493,10 +493,9 @@ function App() {
                     {/* Selector de acompañantes solo si va a confirmar asistencia */}
                     <div className="mb-6 flex flex-col items-center">
                       <span className="block mb-2 text-lg text-[#333333] font-semibold">¿Cuántos asistirán contigo? <span className="text-sm font-normal text-[#8A9A8C]">(incluyéndote a ti)</span></span>
-                      <div className="flex flex-row gap-4 justify-center">
+                      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
                         {opcionesInvitados.map((total) => (
                           <label key={total} className="inline-flex items-center cursor-pointer">
-                            <br />
                             <input
                               type="radio"
                               name="companions"
@@ -509,7 +508,6 @@ function App() {
                               {total === 1 ? 'Solo yo' : `${total - 1} Acompañante y Yo`}
                             </span>
                           </label>
-                          
                         ))}
                       </div>
                       <span className="text-sm text-[#8A9A8C] mt-2">Total de invitados: {companions + 1}</span>
