@@ -496,6 +496,7 @@ function App() {
                       <div className="flex flex-row gap-4 justify-center">
                         {opcionesInvitados.map((total) => (
                           <label key={total} className="inline-flex items-center cursor-pointer">
+                            <br />
                             <input
                               type="radio"
                               name="companions"
@@ -508,6 +509,7 @@ function App() {
                               {total === 1 ? 'Solo yo' : `${total - 1} Acompañante y Yo`}
                             </span>
                           </label>
+                          
                         ))}
                       </div>
                       <span className="text-sm text-[#8A9A8C] mt-2">Total de invitados: {companions + 1}</span>
@@ -530,7 +532,7 @@ function App() {
                     </div>
                     {/* Leyenda No niños */}
                     <div className="mt-4 text-center text-[#B8A99A] font-semibold text-base">No niños.</div>
-                    <div className="mt-4 text-center text-[#B8A99A] font-semibold text-base">Limite de confirmacion 15 de Noviembre, 2025.</div>
+                    <div className="mt-4 text-center text-[#B8A99A] font-semibold text-base">Limite de confirmacion 21 de Noviembre, 2025.</div>
 
                   </>
                 )
